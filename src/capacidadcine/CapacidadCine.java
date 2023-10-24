@@ -11,6 +11,7 @@ import java.util.Scanner;
  * @author Lucas
  */
 public class CapacidadCine {
+    private    Scanner teclado = new Scanner (System.in);
     public static void mostrarAsientos(String[][] asientos){
                 // Mostrar asientos
         for (int i = 0; i < asientos.length; i++) {
@@ -31,15 +32,22 @@ public class CapacidadCine {
         return asientos;
     }
        
-    public static void reservarAsiento(int fila,int columna , String [][] asientos){
+    public static void reservarAsiento( String [][] asientos ){
+           Scanner teclado = new Scanner (System.in);
+         
+        boolean bandera = false;   
+        do {
+              System.out.println("Ingrese cual asiento quiere reservar: (10 filas y 10 columnas)");
+            int fila = teclado.nextInt() - 1;
+            int columna = teclado.nextInt() - 1;
         if(!asientos[fila][columna].equals("L")){
             System.out.println("No se puede reservar porque esta ocupado el asiento");
-            return;
-        }
+        } else  asientos[fila][columna]  =    "X"  ; 
         
-        
-        asientos[fila][columna]  =    "X"  ;   
-          
+            System.out.println("Desea  hacer otra reserva ? s/n");
+            bandera = teclado.next().equals("s") ? false:true;
+         
+       }while(!bandera)    ; 
     };
     
     
@@ -73,10 +81,8 @@ public class CapacidadCine {
                     break;
                 
                 case 2:
-                    System.out.println("Ingrese cual asiento quiere reservar: (10 filas y 10 columnas)");
-                    int fila = teclado.nextInt() - 1;
-                    int columna = teclado.nextInt() - 1;
-                    reservarAsiento(fila,columna,asientos);
+                 
+                    reservarAsiento(asientos);
                     break;
                 
                 case 3:
@@ -87,6 +93,7 @@ public class CapacidadCine {
               
 
             }
+            
         }while(opcion!=3);
            
 
